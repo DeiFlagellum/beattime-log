@@ -74,13 +74,38 @@ have gaps; the position in a tree is the order, not the number.
   eight groups of eight, separated by single spaces (85 characters), for example
   `MROOT 2026W38 731921cf 38dd2447 4ddd4719 489c9699 99334761 ddaa4c60 c2534cab 674b5c3e`.
 
+## Signing keys
+
+Kept here as well as at <https://beattime.live/spec/#keys>, so that a release can be checked
+without asking beattime.live anything. A new key is added here on every rotation; no key is
+ever removed.
+
+| Ed25519 public key (raw, base64) | status | signs |
+|---|---|---|
+| `e7y9THJIUKvNKOZHmdBjJ8E0bOKyBFVxxMpAJ8w574Y=` | current | since 2026-09-21 — every checkpoint in this repository |
+| `YNVYXDyg3hQGM3F+/ec+ZNmeN1JI/hZX+CxLqyJdyN0=` | retired | 2026-06-15 to 2026-09-21 only |
+
+The retired key was configured on two machines at once — production and a development
+mirror — and the mirror signed and Bitcoin-anchored its own weekly roots for 2026-W25 and
+2026-W30. A signature by that key therefore does not identify a root as ours on its own.
+These two roots are **not** authoritative:
+
+| week | rejected root |
+|---|---|
+| 2026-W25 | `b84714db78def4c98a429e0d0e422994cbc32e9de189fe60c96367e10a448969` |
+| 2026-W30 | `7225b61edee6cd82c583759cdca1ae5155b8332cc4e806e5c88bc69c28c270b0` |
+
+The authoritative root of every week is the one you recompute from that week's entries
+(the weekly dump); for weeks with a bank anchor it is also the root named in the `MROOT`
+transfer title. Full account: <https://beattime.live/spec/#incident-2026-09>.
+
 ## Verifying a release
 
 1. `sha256sum -c SHA256SUMS`
 2. `ots verify NNNNNN.json.ots` with the OpenTimestamps client: Bitcoin attests the time by
    which the file existed.
-3. Check the signature as above, then compare `key` with the key history at
-   <https://beattime.live/spec/#keys>.
+3. Check the signature as above, then compare `key` with the key history under
+   [Signing keys](#signing-keys) (the same list is at <https://beattime.live/spec/#keys>).
 4. Check the chain: the SHA-256 of each file equals `prev` of the next one, across releases too.
 5. Download the whole log (`https://beattime.live/api/proof/entries?from=1&limit=1000`, then
    follow `next`, or take the weekly dumps) and recompute the hash chain, `root` for
