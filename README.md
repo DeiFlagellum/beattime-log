@@ -1,13 +1,25 @@
-# BeatTime public log — checkpoint archive
+# Sigelith public log — checkpoint archive
 
-An independent copy of the signed checkpoints of the BeatTime proof-of-existence log
-(<https://beattime.live/checkpoints/>). beattime.live writes it automatically once a week;
+An independent copy of the signed checkpoints of the Sigelith proof-of-existence log
+(<https://sigelith.org/checkpoints/>). sigelith.org writes it automatically once a week;
 nothing here is edited by hand.
 
 A checkpoint is only worth something if you can take it from someone other than the log
 operator. Releases in this repository are **immutable**: once a release is published, its tag
 and files cannot be changed. The repository itself could still be deleted, so every
 checkpoint is also anchored in Bitcoin through OpenTimestamps and archived elsewhere.
+
+## Naming
+
+Sigelith is the proof infrastructure first published as *BeatTime proof* at beattime.live.
+sigelith.org and beattime.live are served by one system, with one log and one signing key:
+every address below also works under `https://beattime.live`, and every proof issued under the
+BeatTime name keeps verifying. This repository was called `beattime-log` until 27 September
+2026 and was renamed before its first release; GitHub redirects the old address.
+
+Format identifiers inside signed data keep their original names — `beattime-proof-v1`,
+`beattime-entry-v1`, `beattime-checkpoint-v1` — because they are part of the signed bytes.
+Full account: <https://sigelith.org/spec/#naming>.
 
 ## Releases
 
@@ -17,10 +29,10 @@ one day after the weekly checkpoint.
 
 | file | content |
 |---|---|
-| `NNNNNN.json` | every checkpoint issued in that week (the daily checkpoints of its days and the weekly checkpoint issued when the week closed), byte for byte as served at `https://beattime.live/checkpoints/NNNNNN.json` |
+| `NNNNNN.json` | every checkpoint issued in that week (the daily checkpoints of its days and the weekly checkpoint issued when the week closed), byte for byte as served at `https://sigelith.org/checkpoints/NNNNNN.json` |
 | `NNNNNN.json.ots` | OpenTimestamps proof for that file |
 | `<week>.jsonl` | every log entry of the week, one per line (absent for a week without entries) |
-| `<week>.html` | the static week page `https://beattime.live/checkpoints/<week>/` at publication time |
+| `<week>.html` | the static week page `https://sigelith.org/checkpoints/<week>/` at publication time |
 | `SHA256SUMS` | SHA-256 of every file above |
 
 ## Checkpoint format — `beattime-checkpoint-v1` (frozen)
@@ -76,8 +88,8 @@ have gaps; the position in a tree is the order, not the number.
 
 ## Signing keys
 
-Kept here as well as at <https://beattime.live/spec/#keys>, so that a release can be checked
-without asking beattime.live anything. A new key is added here on every rotation; no key is
+Kept here as well as at <https://sigelith.org/spec/#keys>, so that a release can be checked
+without asking the operator anything. A new key is added here on every rotation; no key is
 ever removed.
 
 | Ed25519 public key (raw, base64) | status | signs |
@@ -97,7 +109,7 @@ These two roots are **not** authoritative:
 
 The authoritative root of every week is the one you recompute from that week's entries
 (the weekly dump); for weeks with a bank anchor it is also the root named in the `MROOT`
-transfer title. Full account: <https://beattime.live/spec/#incident-2026-09>.
+transfer title. Full account: <https://sigelith.org/spec/#incident-2026-09>.
 
 ## Verifying a release
 
@@ -105,22 +117,22 @@ transfer title. Full account: <https://beattime.live/spec/#incident-2026-09>.
 2. `ots verify NNNNNN.json.ots` with the OpenTimestamps client: Bitcoin attests the time by
    which the file existed.
 3. Check the signature as above, then compare `key` with the key history under
-   [Signing keys](#signing-keys) (the same list is at <https://beattime.live/spec/#keys>).
+   [Signing keys](#signing-keys) (the same list is at <https://sigelith.org/spec/#keys>).
 4. Check the chain: the SHA-256 of each file equals `prev` of the next one, across releases too.
-5. Download the whole log (`https://beattime.live/api/proof/entries?from=1&limit=1000`, then
+5. Download the whole log (`https://sigelith.org/api/proof/entries?from=1&limit=1000`, then
    follow `next`, or take the weekly dumps) and recompute the hash chain, `root` for
    `tree_size`, `last_seq` and `last_chain_hash`, and, for weekly checkpoints, `week_root`
    and the SHA-256 of the dump.
 6. To check two checkpoints without downloading everything, get an RFC 9162 §2.1.4
    consistency proof from
-   `https://beattime.live/api/proof/consistency?first=<older tree_size>&second=<newer tree_size>`
+   `https://sigelith.org/api/proof/consistency?first=<older tree_size>&second=<newer tree_size>`
    and verify it against the roots in the files from here, not against the roots echoed by
    the API.
 
 ## What a checkpoint proves, and what it does not
 
-A checkpoint proves that BeatTime was presented with each fingerprint no later than the time
+A checkpoint proves that Sigelith was presented with each fingerprint no later than the time
 it was recorded, and that the record has not changed since. It does not prove authorship, the
-truth of any content, or that anything happened. BeatTime is not a qualified trust service
+truth of any content, or that anything happened. Sigelith is not a qualified trust service
 provider under eIDAS. The claim is narrower and checkable: verifiable without trusting anyone,
 including us.
