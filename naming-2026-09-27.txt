@@ -1,0 +1,52 @@
+Sigelith - naming announcement
+==============================
+
+Date:     27 September 2026 (UTC)
+Operator: Adam Koch, Hagen, Germany (legal notice: https://beattime.live/de/impressum/)
+
+
+1. The name
+
+Sigelith is the name of the proof-of-existence infrastructure first
+published as "BeatTime proof" at https://beattime.live/ : the public
+append-only log of SHA-256 fingerprints, its signed checkpoints, the
+certificates, the verification API, the time capsules, the key server
+for sealed capsules, the SDKs and the desktop client.
+
+BeatTime remains the name of the time notation (.beat) and of the clock
+apps.
+
+
+2. Facts as of 27 September 2026
+
+- sigelith.org and sigelith.com were registered on 2026-09-27 at
+  15:52:35 UTC (registrar: NameCheap, Inc.; RDAP of Public Interest
+  Registry and of Verisign).
+- The product name "Sigelith Desktop" was reserved in Microsoft Partner
+  Center on 2026-09-27 (Store ID 9P1ZQVR2MPST).
+- A TMview search for "sigelith" (EUIPO, about 70 trade mark offices,
+  similarity search) returned no trade mark on 2026-09-27.
+- The package name "sigelith" was free on PyPI and on npm on
+  2026-09-27.
+- The public repository of weekly log releases was renamed from
+  DeiFlagellum/beattime-log to DeiFlagellum/sigelith-log on 2026-09-27,
+  before its first release.
+
+
+3. What does not change
+
+The log, its entries, checkpoints, anchors and signing keys stay exactly
+as they are. The format identifiers inside signed data
+(beattime-proof-v1, beattime-entry-v1, beattime-checkpoint-v1) keep their
+names, because they are part of what is signed. sigelith.org and
+beattime.live are served by one system, with one log and one key, and
+every proof issued under the name BeatTime keeps verifying at both.
+
+Naming history: https://sigelith.org/spec/#naming
+
+
+4. This file
+
+The SHA-256 of this file is recorded in the log it names, in ISO week
+2026-W39, sealed by that week's signed checkpoint and anchored in
+Bitcoin. The name Sigelith is attested by the system it denotes.
