@@ -1,8 +1,8 @@
 # Sigelith public log — checkpoint archive
 
 An independent copy of the signed checkpoints of the Sigelith proof-of-existence log
-(<https://sigelith.org/checkpoints/>). sigelith.org writes it automatically once a week;
-nothing here is edited by hand.
+(<https://sigelith.org/checkpoints/>). sigelith.org publishes its releases automatically once
+a week; no release is ever edited by hand.
 
 A checkpoint is only worth something if you can take it from someone other than the log
 operator. Releases in this repository are **immutable**: once a release is published, its tag
@@ -136,3 +136,10 @@ it was recorded, and that the record has not changed since. It does not prove au
 truth of any content, or that anything happened. Sigelith is not a qualified trust service
 provider under eIDAS. The claim is narrower and checkable: verifiable without trusting anyone,
 including us.
+
+## License
+
+The checkpoints, log entries and week pages in the releases of this repository, and this
+README, are dedicated to the public domain under
+[CC0 1.0 Universal](LICENSE): copy, mirror and archive them without asking. The quarterly
+archive of the log on Zenodo uses the same licence. Security reports: [SECURITY.md](SECURITY.md).
